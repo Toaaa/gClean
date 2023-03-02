@@ -1,42 +1,206 @@
-﻿<Window x:Class="gClean.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
-        xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
-        xmlns:local="clr-namespace:gClean"
-        mc:Ignorable="d"
-        Title="0x AA" Height="304.898" Width="370" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" Background="#FF252525" Closed="Window_Closed" Loaded="Window_Loaded">
+﻿<Window
+    x:Class="gClean.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:local="clr-namespace:gClean"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+    Title="0x AA"
+    Width="370"
+    Height="304.898"
+    Background="#FF252525"
+    Closed="Window_Closed"
+    Loaded="Window_Loaded"
+    ResizeMode="NoResize"
+    WindowStyle="SingleBorderWindow"
+    mc:Ignorable="d">
     <Grid Background="#FF191818" RenderTransformOrigin="0.501,0.527">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25"/>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="337*"/>
-            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="25" />
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition Width="337*" />
+            <ColumnDefinition Width="0*" />
         </Grid.ColumnDefinitions>
-        <fa:ImageAwesome Icon="Cogs" Margin="269,142,21,108" Foreground="White" Opacity="0.1" RenderTransformOrigin="0.349,0.197" Grid.Column="2"/>
-        <Button Content="clean my tracers" Margin="0,178,85,0" VerticalAlignment="Top" Height="60" BorderBrush="#FF363636" FontWeight="Bold" Foreground="White" FontSize="16" Click="Button_Click_1" HorizontalAlignment="Right" Width="257" Grid.Column="1" Grid.ColumnSpan="2">
+        <fa:ImageAwesome
+            Grid.Column="2"
+            Margin="269,142,21,108"
+            Foreground="White"
+            Icon="Cogs"
+            Opacity="0.1"
+            RenderTransformOrigin="0.349,0.197" />
+        <Button
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Width="257"
+            Height="60"
+            Margin="0,178,85,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            BorderBrush="#FF363636"
+            Click="Button_Click_1"
+            Content="clean my tracers"
+            FontSize="16"
+            FontWeight="Bold"
+            Foreground="White">
             <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF191919" Offset="0"/>
-                    <GradientStop Color="#FF252525" Offset="1"/>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#FF191919" />
+                    <GradientStop Offset="1" Color="#FF252525" />
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <fa:ImageAwesome Icon="FolderOpen" Margin="3,0,0,0" Foreground="White" Opacity="0.1" Height="18" VerticalAlignment="Center" HorizontalAlignment="Left" Width="32" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label Content="0x AA" Margin="0,11,109,0" VerticalAlignment="Top" Foreground="White" FontSize="41" Height="70" FontWeight="Bold" HorizontalAlignment="Right" Width="156" Grid.Column="2"/>
-        <TextBox x:Name="textbox" HorizontalAlignment="Left" Height="29" Margin="30,0,0,0" TextWrapping="Wrap" x:FieldModifier="public" Text="Your G-Mod Path (ex. C:\garrysmod)" VerticalAlignment="Center" Width="222" Background="{x:Null}" Foreground="#FF747474" SelectionBrush="#FF2E8CDA" BorderBrush="#FF302F2F" FontSize="10" TextChanged="textbox_TextChanged" ToolTip="Enter your Game Installation Path" Grid.Column="2"/>
-        <Label Content="&quot;Rewritten by Gambino aka 0x AA | Credits Exomods&quot;" HorizontalAlignment="Left" Margin="5,81,0,0" VerticalAlignment="Top" Foreground="#FF747474" FontStyle="Italic" Height="30" Width="294" HorizontalContentAlignment="Center" Grid.Column="2"/>
-        <Button Content="Settings" Margin="0,0,17,112" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click_3" Opacity="0.1" HorizontalAlignment="Right" Width="54" Height="52" VerticalAlignment="Bottom" ToolTip="Open Settings Window" Grid.Column="2"/>
-        <Label Content="v2" HorizontalAlignment="Right" Margin="0,42,-29,0" VerticalAlignment="Top" Foreground="#FF747474" FontStyle="Italic" Height="30" Width="287" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" FontWeight="Bold" Grid.Column="2"/>
-        <CheckBox x:Name="AddonsCheck" Content="Clean /addons" HorizontalAlignment="Left" Margin="11,255,0,0" Foreground="#FF747474" Checked="cbox_Checked" Unchecked="cbox_Unchecked" IsChecked="False" Height="15" VerticalAlignment="Top" ToolTip="Cleans your Addons folder. " Grid.Column="2" Width="239"/>
-        <fa:ImageAwesome Icon="Dashboard" Margin="269,210,21,39" Foreground="White" Opacity="0.1" RenderTransformOrigin="0.349,0.197" Grid.Column="2"/>
-        <Button Content="Settings" Margin="0,0,17,43" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click_6" Opacity="0.1" HorizontalAlignment="Right" Width="54" Height="53" VerticalAlignment="Bottom" ToolTip="Open AutoInject Window" Grid.Column="2"/>
-        <Button Content="CleanCheats" Margin="0,0,11,226" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Click="Button_Click_69" Opacity="0.1" HorizontalAlignment="Right" Width="66" Height="60" VerticalAlignment="Bottom" ToolTip="Clean your cheats" Grid.Column="2"/>
-        <fa:ImageAwesome Icon="Heart" Margin="271,10,21,232" Foreground="White" Opacity="0.1" RenderTransformOrigin="0.349,0.197" Grid.Column="2"/>
-        <CheckBox x:Name="ClearCheck" Content="Clean /cache." HorizontalAlignment="Left" Margin="150,254,0,0" Foreground="#FF747474" Checked="cbox_Checked1" Unchecked="cbox_Unchecked1" IsChecked="False" Height="16" VerticalAlignment="Top" ToolTip="Cleaning your Cache files (may required for some servers). " Grid.Column="2" Width="238" Grid.ColumnSpan="2"/>
+        <fa:ImageAwesome
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Width="32"
+            Height="18"
+            Margin="3,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Foreground="White"
+            Icon="FolderOpen"
+            Opacity="0.1" />
+        <Label
+            Grid.Column="2"
+            Width="156"
+            Height="70"
+            Margin="0,11,109,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="0x AA"
+            FontSize="41"
+            FontWeight="Bold"
+            Foreground="White" />
+        <TextBox
+            x:Name="textbox"
+            Grid.Column="2"
+            Width="222"
+            Height="29"
+            Margin="30,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            x:FieldModifier="public"
+            Background="{x:Null}"
+            BorderBrush="#FF302F2F"
+            FontSize="10"
+            Foreground="#FF747474"
+            SelectionBrush="#FF2E8CDA"
+            Text="Your G-Mod Path (ex. C:\garrysmod)"
+            TextChanged="textbox_TextChanged"
+            TextWrapping="Wrap"
+            ToolTip="Enter your Game Installation Path" />
+        <Label
+            Grid.Column="2"
+            Width="294"
+            Height="30"
+            Margin="5,81,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="&quot;Rewritten by Gambino aka 0x AA | Credits Exomods&quot;"
+            FontStyle="Italic"
+            Foreground="#FF747474" />
+        <Button
+            Grid.Column="2"
+            Width="54"
+            Height="52"
+            Margin="0,0,17,112"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}"
+            Click="Button_Click_3"
+            Content="Settings"
+            Foreground="{x:Null}"
+            Opacity="0.1"
+            ToolTip="Open Settings Window" />
+        <Label
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Width="287"
+            Height="30"
+            Margin="0,42,-29,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="v2"
+            FontStyle="Italic"
+            FontWeight="Bold"
+            Foreground="#FF747474" />
+        <CheckBox
+            x:Name="AddonsCheck"
+            Grid.Column="2"
+            Width="239"
+            Height="15"
+            Margin="11,255,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Checked="cbox_Checked"
+            Content="Clean /addons"
+            Foreground="#FF747474"
+            IsChecked="False"
+            ToolTip="Cleans your Addons folder. "
+            Unchecked="cbox_Unchecked" />
+        <fa:ImageAwesome
+            Grid.Column="2"
+            Margin="269,210,21,39"
+            Foreground="White"
+            Icon="Dashboard"
+            Opacity="0.1"
+            RenderTransformOrigin="0.349,0.197" />
+        <Button
+            Grid.Column="2"
+            Width="54"
+            Height="53"
+            Margin="0,0,17,43"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}"
+            Click="Button_Click_6"
+            Content="Settings"
+            Foreground="{x:Null}"
+            Opacity="0.1"
+            ToolTip="Open AutoInject Window" />
+        <Button
+            Grid.Column="2"
+            Width="66"
+            Height="60"
+            Margin="0,0,11,226"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}"
+            Click="Button_Click_69"
+            Content="CleanCheats"
+            Foreground="{x:Null}"
+            Opacity="0.1"
+            ToolTip="Clean your cheats" />
+        <fa:ImageAwesome
+            Grid.Column="2"
+            Margin="271,10,21,232"
+            Foreground="White"
+            Icon="Heart"
+            Opacity="0.1"
+            RenderTransformOrigin="0.349,0.197" />
+        <CheckBox
+            x:Name="ClearCheck"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Width="238"
+            Height="16"
+            Margin="150,254,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Checked="cbox_Checked1"
+            Content="Clean /cache."
+            Foreground="#FF747474"
+            IsChecked="False"
+            ToolTip="Cleaning your Cache files (may required for some servers). "
+            Unchecked="cbox_Unchecked1" />
 
     </Grid>
 </Window>

@@ -1,49 +1,125 @@
-﻿<Window x:Class="gClean.SettingsWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
-        xmlns:local="clr-namespace:gClean"
-        mc:Ignorable="d"
-        Title="Settings" Height="292.467" Width="275.4" Background="#FF191818" ResizeMode="NoResize" Loaded="Window_Loaded" Closed="Window_Closed">
+﻿<Window
+    x:Class="gClean.SettingsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:local="clr-namespace:gClean"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Settings"
+    Width="275.4"
+    Height="292.467"
+    Background="#FF191818"
+    Closed="Window_Closed"
+    Loaded="Window_Loaded"
+    ResizeMode="NoResize"
+    mc:Ignorable="d">
     <Grid>
-        <Button Content="Delete G-Mod" HorizontalAlignment="Left" Margin="7,199,0,0" VerticalAlignment="Top" Width="247" Height="36" BorderBrush="#FF363636" Foreground="#FFD83535" FontSize="16" Click="Button_Click_3">
+        <Button
+            Width="247"
+            Height="36"
+            Margin="7,199,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderBrush="#FF363636"
+            Click="Button_Click_3"
+            Content="Delete G-Mod"
+            FontSize="16"
+            Foreground="#FFD83535">
             <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF191919" Offset="0"/>
-                    <GradientStop Color="#FF252525" Offset="1"/>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#FF191919" />
+                    <GradientStop Offset="1" Color="#FF252525" />
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Clear Addons Folder" HorizontalAlignment="Left" Margin="7,158,0,0" VerticalAlignment="Top" Width="247" Height="36" BorderBrush="#FF363636" Foreground="White" FontSize="16" Click="Button_Click_2">
+        <Button
+            Width="247"
+            Height="36"
+            Margin="7,158,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderBrush="#FF363636"
+            Click="Button_Click_2"
+            Content="Clear Addons Folder"
+            FontSize="16"
+            Foreground="White">
             <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF191919" Offset="0"/>
-                    <GradientStop Color="#FF252525" Offset="1"/>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#FF191919" />
+                    <GradientStop Offset="1" Color="#FF252525" />
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Clear Workshop Folder" HorizontalAlignment="Left" Margin="7,117,0,0" VerticalAlignment="Top" Width="247" Height="36" BorderBrush="#FF363636" Foreground="White" FontSize="16" Click="Button_Click_1">
+        <Button
+            Width="247"
+            Height="36"
+            Margin="7,117,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderBrush="#FF363636"
+            Click="Button_Click_1"
+            Content="Clear Workshop Folder"
+            FontSize="16"
+            Foreground="White">
             <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF191919" Offset="0"/>
-                    <GradientStop Color="#FF252525" Offset="1"/>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#FF191919" />
+                    <GradientStop Offset="1" Color="#FF252525" />
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <fa:ImageAwesome Icon="Cogs" Margin="-29,-16,160,153" Foreground="White" Opacity="0.03" RenderTransformOrigin="0.349,0.197" Spin="False" SpinDuration="25">
+        <fa:ImageAwesome
+            Margin="-29,-16,160,153"
+            Foreground="White"
+            Icon="Cogs"
+            Opacity="0.03"
+            RenderTransformOrigin="0.349,0.197"
+            Spin="False"
+            SpinDuration="25">
             <fa:ImageAwesome.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="20.291"/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform Angle="20.291" />
+                    <TranslateTransform />
                 </TransformGroup>
             </fa:ImageAwesome.RenderTransform>
         </fa:ImageAwesome>
-        <Label Content="Settings" HorizontalAlignment="Left" Margin="60,-8,0,0" VerticalAlignment="Top" Foreground="White" Height="61" Width="147" FontSize="36"/>
-        <Label Content="made with &lt;3 by gambino" HorizontalAlignment="Left" Margin="108,235,0,0" VerticalAlignment="Top" Width="151" Foreground="#FF6E6E6E" FontSize="8" Height="20"/>
-        <TextBox x:Name="textbox" HorizontalAlignment="Left" Height="29" Margin="10,83,0,0" TextWrapping="Wrap" x:FieldModifier="public" Text="Your G-Mod Path (eg. C:\garrysmod)" VerticalAlignment="Top" Width="244" Background="{x:Null}" Foreground="#FF747474" SelectionBrush="#FF2E8CDA" BorderBrush="{x:Null}" FontSize="10" TextChanged="textbox_TextChanged" SelectionOpacity="0.5"/>
+        <Label
+            Width="147"
+            Height="61"
+            Margin="60,-8,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Settings"
+            FontSize="36"
+            Foreground="White" />
+        <Label
+            Width="151"
+            Height="20"
+            Margin="108,235,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="made with &lt;3 by gambino"
+            FontSize="8"
+            Foreground="#FF6E6E6E" />
+        <TextBox
+            x:Name="textbox"
+            Width="244"
+            Height="29"
+            Margin="10,83,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            x:FieldModifier="public"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}"
+            FontSize="10"
+            Foreground="#FF747474"
+            SelectionBrush="#FF2E8CDA"
+            SelectionOpacity="0.5"
+            Text="Your G-Mod Path (eg. C:\garrysmod)"
+            TextChanged="textbox_TextChanged"
+            TextWrapping="Wrap" />
     </Grid>
 </Window>

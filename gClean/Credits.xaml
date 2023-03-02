@@ -1,30 +1,99 @@
-﻿<Window x:Class="gClean.Credits"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
-        xmlns:local="clr-namespace:gClean"
-        mc:Ignorable="d"
-        Title="Credits" Height="310.455" Width="394.461" Background="#FF191818">
+﻿<Window
+    x:Class="gClean.Credits"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:local="clr-namespace:gClean"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Credits"
+    Width="394.461"
+    Height="310.455"
+    Background="#FF191818"
+    mc:Ignorable="d">
     <Grid>
-        <fa:ImageAwesome Icon="Code" Margin="-36,-67,284,144" Foreground="White" Opacity="0.1" RenderTransformOrigin="0.349,0.197">
+        <fa:ImageAwesome
+            Margin="-36,-67,284,144"
+            Foreground="White"
+            Icon="Code"
+            Opacity="0.1"
+            RenderTransformOrigin="0.349,0.197">
             <fa:ImageAwesome.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-14.62"/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform Angle="-14.62" />
+                    <TranslateTransform />
                 </TransformGroup>
             </fa:ImageAwesome.RenderTransform>
         </fa:ImageAwesome>
-        <Label Content="Credits" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Foreground="White" Height="62" Width="127" FontSize="36"/>
-        <Label Content="Thanks to:" HorizontalAlignment="Left" Margin="158,77,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Label Content="methamphetamine.solutions discord for the cat gifs" Margin="0,108,0,0" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Width="386" FontStyle="Italic"/>
-        <Label Content="suchtbunker team for giving me this idea" Margin="0,139,0,0" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Width="386" FontStyle="Italic"/>
-        <Label Content="vaspid for building nazi symbols on servers" Margin="0,170,0,0" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Width="386" FontStyle="Italic"/>
-        <Label Content="ernsthaft (a.k.a. the famous Hans Benz) for accounts and helping me troll" Margin="0,201,0,0" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Width="386" FontStyle="Italic" FontSize="11"/>
-        <Label Content="SBAC for the being a sigma and helping me bypass bans" Margin="0,232,0,0" VerticalAlignment="Top" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Width="386" FontStyle="Italic"/>
-        <Label Content="(Ich liebe deine Videos)" HorizontalAlignment="Left" Margin="263,254,0,0" VerticalAlignment="Top" Foreground="White" FontSize="7"/>
+        <Label
+            Width="127"
+            Height="62"
+            Margin="125,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Credits"
+            FontSize="36"
+            Foreground="White" />
+        <Label
+            Margin="158,77,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Thanks to:"
+            Foreground="White" />
+        <Label
+            Width="386"
+            Margin="0,108,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="methamphetamine.solutions discord for the cat gifs"
+            FontStyle="Italic"
+            Foreground="White" />
+        <Label
+            Width="386"
+            Margin="0,139,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="suchtbunker team for giving me this idea"
+            FontStyle="Italic"
+            Foreground="White" />
+        <Label
+            Width="386"
+            Margin="0,170,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="vaspid for building nazi symbols on servers"
+            FontStyle="Italic"
+            Foreground="White" />
+        <Label
+            Width="386"
+            Margin="0,201,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="ernsthaft (a.k.a. the famous Hans Benz) for accounts and helping me troll"
+            FontSize="11"
+            FontStyle="Italic"
+            Foreground="White" />
+        <Label
+            Width="386"
+            Margin="0,232,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="SBAC for the being a sigma and helping me bypass bans"
+            FontStyle="Italic"
+            Foreground="White" />
+        <Label
+            Margin="263,254,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="(Ich liebe deine Videos)"
+            FontSize="7"
+            Foreground="White" />
     </Grid>
 </Window>

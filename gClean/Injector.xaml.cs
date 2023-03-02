@@ -1,21 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Diagnostics;
-using Reloaded.Injector;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 namespace gClean
@@ -26,8 +13,17 @@ namespace gClean
 
     public partial class Injector : Window
     {
-        public bool IsInjected = false;
-        public bool IsAutoInjecting = false;
+        public bool IsInjected
+        {
+            get;
+            private set;
+        } = false;
+        public bool IsAutoInjecting
+        {
+            get;
+            private set;
+        } = false;
+
         public Injector()
         {
             InitializeComponent();
@@ -38,8 +34,6 @@ namespace gClean
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var filePath = string.Empty;
-
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = "c:\\";
@@ -49,8 +43,8 @@ namespace gClean
 
                 if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    //Get the path of specified file
-                    filePath = openFileDialog.FileName;
+                    // Get the path of specified file
+                    string filePath = openFileDialog.FileName;
                     textbox.Text = filePath;
                 }
             }
@@ -63,7 +57,6 @@ namespace gClean
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
 
-
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,7 +66,7 @@ namespace gClean
 
         private void Inject_Click(object sender, RoutedEventArgs e)
         {
-            if (textbox.Text != "" && textbox.Text != " " && textbox.Text != "File to Hook (.dll)")
+            if (!string.IsNullOrEmpty(textbox.Text) && textbox.Text != "File to Hook (.dll)")
             {
                 TryInjecting();
             }
@@ -85,13 +78,15 @@ namespace gClean
 
         private void AutoInject_Checked(object sender, RoutedEventArgs e)
         {
-            if (textbox.Text != "" && textbox.Text != " " && textbox.Text != "File to Hook (.dll)")
+            if (!string.IsNullOrEmpty(textbox.Text) && textbox.Text != "File to Hook (.dll)")
             {
                 if (IsAutoInjecting == false)
                 {
                     IsAutoInjecting = true;
-                    System.Timers.Timer timer = new System.Timers.Timer();
-                    timer.Interval = 1500;
+                    System.Timers.Timer timer = new System.Timers.Timer
+                    {
+                        Interval = 1500
+                    };
                     timer.Elapsed += timer_Elapsed;
                     timer.Start();
                 }
@@ -120,8 +115,7 @@ namespace gClean
         }
         public void TryInjecting()
         {
-            Dispatcher.Invoke(() =>
-            {
+            Dispatcher.Invoke(() => {
                 try
                 {
                     var hl2 = Process.GetProcessesByName("hl2");

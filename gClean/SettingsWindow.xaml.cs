@@ -1,38 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace gClean
 {
-    /// <summary>
-    /// Interaktionslogik für SettingsWindow.xaml
-    /// </summary>
     public partial class SettingsWindow : Window
     {
+        private readonly string garrysModPath;
+
         public SettingsWindow()
         {
             InitializeComponent();
+            garrysModPath = textbox.Text;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void DeleteDirectory(string directoryPath)
         {
-            string spath = textbox.Text;
-            string wpath = "\\garrysmod\\cache\\workshop";
-            if (Directory.Exists(spath))
+            if (Directory.Exists(directoryPath))
             {
+                Directory.Delete(directoryPath, true);
                 var lw = new LoadingWindow();
-                Directory.Delete(spath + wpath, true);
                 lw.Show();
             }
             else
@@ -40,7 +28,20 @@ namespace gClean
                 var ew = new Error();
                 ew.Show();
             }
+        }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string workshopPath = "\\garrysmod\\cache\\workshop";
+            string fullPath = garrysModPath + workshopPath;
+            DeleteDirectory(fullPath);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            string addonsPath = "\\garrysmod\\addons";
+            string fullPath = garrysModPath + addonsPath;
+            DeleteDirectory(fullPath);
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -49,34 +50,7 @@ namespace gClean
 
             if (confirmResult == MessageBoxResult.Yes)
             {
-                string spath = textbox.Text;
-                if (Directory.Exists(spath))
-                {
-                    var lw = new LoadingWindow();
-                    Directory.Delete(spath, true);
-                    lw.Show();
-                }
-                else
-                {
-                    var ew = new Error();
-                    ew.Show();
-                }
-            }
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            string spath = textbox.Text;
-            if (Directory.Exists(spath + "\\garrysmod\\addons"))
-            {
-                var lw = new LoadingWindow();
-                Directory.Delete(spath + "\\garrysmod\\addons", true);
-                lw.Show();
-            }
-            else
-            {
-                var ew = new Error();
-                ew.Show();
+                DeleteDirectory(garrysModPath);
             }
         }
 

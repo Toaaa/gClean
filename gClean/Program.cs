@@ -25,6 +25,11 @@ namespace KeyAuth
 
         private static void Connect(string[] args)
         {
+            if (args is null)
+            {
+                throw new ArgumentNullException(nameof(args));
+            }
+
             Console.Title = "Loader";
             Console.WriteLine("\n\n Connecting..");
             KeyAuthApp.init();
@@ -118,8 +123,6 @@ namespace KeyAuth
             var mw = new MainWindow();
             mw.Show();
 
-
-
             // user data
             Console.WriteLine("\n User data:");
             Console.WriteLine(" Username: " + KeyAuthApp.user_data.username);
@@ -196,7 +199,6 @@ namespace KeyAuth
 
             // KeyAuthApp.log("user logged in"); // log text to website and discord webhook (if set)
 
-
             // let's say you want to send request to https://keyauth.win/api/seller/?sellerkey=sellerkeyhere&type=black&ip=1.1.1.1&hwid=abc
             // but doing that from inside the loader is a bad idea as the link could get leaked.
             // Instead, you should create a webhook with the https://keyauth.win/api/seller/?sellerkey=sellerkeyhere&type=black part as the URL
@@ -259,7 +261,7 @@ namespace KeyAuth
 
         public static bool SubExist(string name)
         {
-            if(KeyAuthApp.user_data.subscriptions.Exists(x => x.subscription == name))
+            if (KeyAuthApp.user_data.subscriptions.Exists(x => x.subscription == name))
                 return true;
             return false;
         }

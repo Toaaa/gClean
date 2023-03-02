@@ -1,20 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 using System.IO;
-using System.Diagnostics;
 using Microsoft.Win32;
 
 namespace gClean
@@ -22,7 +9,6 @@ namespace gClean
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
-
 
     public partial class MainWindow : Window
     {
@@ -33,7 +19,7 @@ namespace gClean
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void timer_tick(object sender, EventArgs e)
@@ -63,17 +49,25 @@ namespace gClean
             Properties.Settings.Default.Save();
         }
 
+        // Improved Window_Loaded function
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             string directory = "";
-            if (Properties.Settings.Default.pathtxt != "")
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.pathtxt))
             {
                 textbox.Text = Properties.Settings.Default.pathtxt;
             }
             else
             {
-                Properties.Settings.Default.pathtxt = locategmod(directory);
-                textbox.Text = Properties.Settings.Default.pathtxt;
+                try
+                {
+                    Properties.Settings.Default.pathtxt = LocateGMod();
+                    textbox.Text = Properties.Settings.Default.pathtxt;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -94,7 +88,6 @@ namespace gClean
 
         }
 
-
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
 
@@ -108,7 +101,6 @@ namespace gClean
         private void Button_Click_69(object sender, RoutedEventArgs e)
         {
 
-
             string keyName = @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU";
 
             RegistryKey key = Registry.CurrentUser.OpenSubKey(keyName, true);
@@ -118,55 +110,33 @@ namespace gClean
                 Registry.CurrentUser.DeleteSubKeyTree(keyName);
             }
 
+            string[] directoriesToDelete = new string[] {
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OinkIndustries"),
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "LemiProject"),
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Desmod"),
+            "C:\\exechack",
+            "C:\\GaztoofScripthook",
+            "C:\\GMOD-SDK-Settings"
+            };
 
-
-            string username = Environment.UserName;
-
-            string opath = $"C:\\Users\\{username}\\AppData\\Roaming\\OinkIndustries";
-            string lpath = $"C:\\Users\\{username}\\Documents\\LemiProject";
-            string dlpath = $"C:\\Users\\{username}\\Documents\\Desmod";
-            string epath = "C:\\exechack";
-            string gpath = "C:\\GaztoofScripthook";
-            string ggpath = "C:\\GMOD-SDK-Settings";
-
-
-
-            if (Directory.Exists(opath))
+            foreach (string directory in directoriesToDelete)
             {
-                Directory.Delete(opath, true);
+                try
+                {
+                    if (Directory.Exists(directory))
+                    {
+                        Directory.Delete(directory, true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // handle exception
+                    Console.WriteLine($"Failed to delete directory {directory}: {ex.Message}");
+                }
             }
 
-            if (Directory.Exists(lpath))
-            {
-                Directory.Delete(lpath, true);
-            }
-
-            if (Directory.Exists(dlpath))
-            {
-                Directory.Delete(dlpath, true);
-            }
-
-            if (Directory.Exists(epath))
-            {
-                Directory.Delete(epath, true);
-            }
-
-            if (Directory.Exists(gpath))
-            {
-                Directory.Delete(gpath, true);
-            }
-
-            if (Directory.Exists(ggpath))
-            {
-                Directory.Delete(ggpath, true);
-            }
-
-
-            var lw = new LoadingWindow();
-            lw.Show();
-
-
-
+            var loadingWindow = new LoadingWindow();
+            loadingWindow.Show();
 
         }
 
@@ -179,7 +149,6 @@ namespace gClean
 
         }
 
-
         private void cbox_Unchecked(object sender, RoutedEventArgs e)
         {
 
@@ -190,109 +159,84 @@ namespace gClean
 
         }
 
-        static void cleaner(bool KeepAddons, string path)
+        // Improved cleaner function
+        static void cleaner(bool keepAddons, string path)
         {
- 
-
-            string dpath = "\\garrysmod\\data";
-            string apath = "\\garrysmod\\addons";
-            string clpath = "\\garrysmod\\cache\\lua";
-            string upath = "\\garrysmod\\download\\user_custom";
-
-
-            if (Directory.Exists(path))
+            string[] directoriesToDelete = new string[]
             {
-                // Removed most stuff from v1.2 as it was too aggressive. Might make it optional later
+                "data",
+                "cache\\lua",
+                "download\\user_custom"
+            };
 
-                if (Directory.Exists(path + dpath))
-                {
-                    Directory.Delete(path + dpath, true);
-                }
+            string[] filesToDelete = new string[]
+            {
+                "cl.db",
+                "mn.db",
+                "sv.db"
+            };
 
-                if (Directory.Exists(path + clpath))
-                {
-                    Directory.Delete(path + clpath, true);
-                }
-
-                if (Directory.Exists(path + upath))
-                {
-                    Directory.Delete(path + upath, true);
-                }
-
-
-                if (KeepAddons == true)
-                {
-                    if (Directory.Exists(path + apath))
-                    {
-                        Directory.Delete(path + apath, true);
-                    }
-                }
-
-
-
-                if (File.Exists(path + "\\garrysmod\\cl.db"))
-                {
-                    File.Delete(path + "\\garrysmod\\cl.db");
-                }
-
-                if (File.Exists(path + "\\garrysmod\\mn.db"))
-                {
-                    File.Delete(path + "\\garrysmod\\mn.db");
-                }
-
-                if (File.Exists(path + "\\garrysmod\\sv.db"))
-                {
-                    File.Delete(path + "\\garrysmod\\sv.db");
-                }
-            }
-            else
+            if (!Directory.Exists(path))
             {
                 var ew = new Error();
                 ew.Show();
+                return;
+            }
+
+            foreach (string directoryName in directoriesToDelete)
+            {
+                string directoryPath = Path.Combine(path, "garrysmod", directoryName);
+                if (Directory.Exists(directoryPath))
+                {
+                    Directory.Delete(directoryPath, true);
+                }
+            }
+
+            if (!keepAddons)
+            {
+                string addonsPath = Path.Combine(path, "garrysmod", "addons");
+                if (Directory.Exists(addonsPath))
+                {
+                    Directory.Delete(addonsPath, true);
+                }
+            }
+
+            foreach (string fileName in filesToDelete)
+            {
+                string filePath = Path.Combine(path, "garrysmod", fileName);
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
             }
         }
 
-        static string locategmod(string directory)
-        {
-            // Checks possible GMod Installations.
 
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
-            try
+        // Improved locategmod function
+        private string LocateGMod()
+        {
+            string[] possibleDirectories =
             {
-                foreach (DriveInfo d in allDrives)
+                "Program Files (x86)\\Steam\\steamapps\\common\\GarrysMod",
+                "Program Files\\Steam\\steamapps\\common\\GarrysMod",
+                "Steam\\steamapps\\common\\GarrysMod",
+                "Games\\SteamLibrary\\steamapps\\common\\GarrysMod",
+                "SteamLibrary\\steamapps\\common\\GarrysMod",
+                "SteamApps\\common\\GarrysMod"
+            };
+            string directory = "";
+            foreach (DriveInfo d in DriveInfo.GetDrives())
+            {
+                foreach (string possibleDirectory in possibleDirectories)
                 {
-                    if (Directory.Exists(d.Name + "Program Files (x86)\\Steam\\steamapps\\common\\GarrysMod"))
+                    if (Directory.Exists(Path.Combine(d.Name, possibleDirectory)))
                     {
-                        directory = d.Name + "Program Files (x86)\\Steam\\steamapps\\common\\GarrysMod";
-                    }
-                    else if (Directory.Exists(d.Name + "Program Files\\Steam\\steamapps\\common\\GarrysMod"))
-                    {
-                        directory = d.Name + "Program Files\\Steam\\steamapps\\common\\GarrysMod";
-                    }
-                    else if (Directory.Exists(d.Name + "Steam\\steamapps\\common\\GarrysMod"))
-                    {
-                        directory = d.Name + "Steam\\steamapps\\common\\GarrysMod";
-                    }
-                    else if (Directory.Exists(d.Name + "Games\\Steam\\steamapps\\common\\GarrysMod"))
-                    {
-                        directory = d.Name + "Games\\SteamLibrary\\steamapps\\common\\GarrysMod";
-                    }
-                    else if (Directory.Exists(d.Name + "SteamLibrary\\steamapps\\common\\GarrysMod"))
-                    {
-                        directory = d.Name + "SteamLibrary\\steamapps\\common\\GarrysMod";
-                    }
-                    else if (Directory.Exists(d.Name + "SteamLibrary\\steamapps\\common\\GarrysMod"))
-                    {
-                        directory = d.Name + "SteamLibrary\\steamapps\\common\\GarrysMod";
+                        directory = Path.Combine(d.Name, possibleDirectory);
+                        return directory;
                     }
                 }
             }
-            catch
-            {
-                MessageBox.Show("gClean couldn't find your GMod installation. Please enter it manually");
-            }
-            return directory;
-
+            throw new Exception("gClean couldn't find your GMod installation. Please enter it manually");
         }
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
@@ -301,7 +245,5 @@ namespace gClean
             inj.Show();
         }
 
-
     }
 }
-

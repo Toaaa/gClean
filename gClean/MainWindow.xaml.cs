@@ -52,7 +52,6 @@ namespace gClean
         // Improved Window_Loaded function
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            string directory = "";
             if (!string.IsNullOrEmpty(Properties.Settings.Default.pathtxt))
             {
                 textbox.Text = Properties.Settings.Default.pathtxt;

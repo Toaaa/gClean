@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.IO;
 using Microsoft.Win32;
+using System.Collections.Generic;
 
 namespace gClean
 {
@@ -175,6 +176,12 @@ namespace gClean
                 "sv.db"
             };
 
+            List<string> excludeFromDelete = new List<string>
+            {
+                "sb_dupes",
+                "sb_adverts"
+            };
+
             if (!Directory.Exists(path))
             {
                 var ew = new Error();
@@ -185,7 +192,7 @@ namespace gClean
             foreach (string directoryName in directoriesToDelete)
             {
                 string directoryPath = Path.Combine(path, "garrysmod", directoryName);
-                if (Directory.Exists(directoryPath))
+                if (Directory.Exists(directoryPath) && !excludeFromDelete.Contains(directoryName))
                 {
                     Directory.Delete(directoryPath, true);
                 }
@@ -209,6 +216,7 @@ namespace gClean
                 }
             }
         }
+
 
 
         // Improved locategmod function

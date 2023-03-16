@@ -171,6 +171,7 @@ namespace gClean
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Desmod"),
                 Path.Combine("C:\\", "exechack"),
                 Path.Combine("C:\\", "GaztoofScripthook"),
+                Path.Combine("C:\\Program Files (x86)\\Steam\\steamapps\\common\\GarrysMod", "Memoriam"),
                 Path.Combine("C:\\", "GMOD-SDK-Settings")
             };
 

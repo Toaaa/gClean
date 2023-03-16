@@ -132,10 +132,10 @@
             Foreground="#FF747474" />
         <CheckBox
             x:Name="AddonsCheck"
-            Grid.Column="2"
-            Width="239"
+            Grid.ColumnSpan="3"
+            Width="101"
             Height="15"
-            Margin="11,245,0,0"
+            Margin="24,245,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Checked="cbox_Checked"
@@ -165,35 +165,12 @@
             Foreground="{x:Null}"
             Opacity="0.1"
             ToolTip="Open AutoInject Window" />
-        <Button
-            Grid.Column="2"
-            Width="45"
-            Height="53"
-            Margin="0,0,11,224"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Background="{x:Null}"
-            BorderBrush="{x:Null}"
-            Click="Button_Click_69"
-            Content="CleanCheats"
-            Foreground="{x:Null}"
-            Opacity="0.1"
-            RenderTransformOrigin="0.467,0.417"
-            ToolTip="Clean your cheats" />
-        <fa:ImageAwesome
-            Grid.Column="2"
-            Margin="271,10,21,232"
-            Foreground="White"
-            Icon="Heart"
-            Opacity="0.1"
-            RenderTransformOrigin="0.349,0.197" />
         <CheckBox
             x:Name="ClearCheck"
             Grid.Column="2"
-            Grid.ColumnSpan="2"
-            Width="238"
+            Width="90"
             Height="16"
-            Margin="150,245,0,0"
+            Margin="92,245,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Checked="cbox_Checked1"
@@ -202,6 +179,21 @@
             IsChecked="False"
             ToolTip="Cleaning your Cache files (may required for some servers). "
             Unchecked="cbox_Unchecked1" />
+
+        <!-- <CheckBox
+            x:Name="CleanCheatsCheck"
+            Grid.Column="2"
+            Width="90"
+            Height="16"
+            Margin="186,245,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Checked="CleanCheatsCheck_Checked"
+            Content="Clean Cheats"
+            Foreground="#FF747474"
+            IsChecked="False"
+            ToolTip="Cleaning all of your Cheat files (ALSO CLEANS CONFIGS!)."
+            Unchecked="cbox_Unchecked1" />-->
 
     </Grid>
 </Window>

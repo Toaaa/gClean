@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using System.IO;
 using Microsoft.Win32;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace gClean
 {
@@ -13,6 +15,7 @@ namespace gClean
 
     public partial class MainWindow : Window
     {
+        private static readonly ILogger _logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<MainWindow>();
         public MainWindow()
         {
 
@@ -29,16 +32,49 @@ namespace gClean
         }
 
         public static string path = "";
+
+        private void CleanCheatsCheck_Checked(object sender, RoutedEventArgs e)
+        { }
+
+        private void CleanCheatsCheck_Unchecked(object sender, RoutedEventArgs e)
+        { }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             bool KeepAddons = AddonsCheck.IsChecked.Value;
             bool ClearCache = ClearCheck.IsChecked.Value;
+            // bool CleanCheats = CleanCheatsCheck.IsChecked.Value;
             string path = textbox.Text;
-            cleaner(KeepAddons, path);
-            cleaner(ClearCache, path);
+
+            if (KeepAddons)
+            {
+                string addonsPath = Path.Combine(path, "addons");
+                cleaner(true, addonsPath);
+            }
+
+            if (ClearCache)
+            {
+                string cachePath = Path.Combine(path, "cache");
+                cleaner(false, cachePath);
+
+                string keyName = @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU";
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(keyName, true);
+                if (key != null)
+                {
+                    key.Close();
+                    Registry.CurrentUser.DeleteSubKeyTree(keyName);
+                }
+            }
+
+            // if (CleanCheatsCheck.IsChecked.HasValue && CleanCheatsCheck.IsChecked.Value)
+            // {
+            //     CleanCheats();
+            // }
+
             var result = new LoadingWindow();
             result.Show();
         }
+
         private void Button_MouseHover(object sender, EventArgs e)
         {
 
@@ -98,48 +134,6 @@ namespace gClean
 
         }
 
-        private void Button_Click_69(object sender, RoutedEventArgs e)
-        {
-
-            string keyName = @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU";
-
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(keyName, true);
-            if (key != null)
-            {
-                key.Close();
-                Registry.CurrentUser.DeleteSubKeyTree(keyName);
-            }
-
-            string[] directoriesToDelete = new string[] {
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OinkIndustries"),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "LemiProject"),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Desmod"),
-            "C:\\exechack",
-            "C:\\GaztoofScripthook",
-            "C:\\GMOD-SDK-Settings"
-            };
-
-            foreach (string directory in directoriesToDelete)
-            {
-                try
-                {
-                    if (Directory.Exists(directory))
-                    {
-                        Directory.Delete(directory, true);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // handle exception
-                    Console.WriteLine($"Failed to delete directory {directory}: {ex.Message}");
-                }
-            }
-
-            var loadingWindow = new LoadingWindow();
-            loadingWindow.Show();
-
-        }
-
         private void cbox_Checked(object sender, RoutedEventArgs e)
         {
 
@@ -158,6 +152,48 @@ namespace gClean
         {
 
         }
+
+        private async void CleanCheats(object sender, RoutedEventArgs e)
+        {
+            string keyName = @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU";
+
+            using (var key = Registry.CurrentUser.OpenSubKey(keyName, true))
+            {
+                if (key != null)
+                {
+                    key.DeleteSubKeyTree(keyName);
+                }
+            }
+
+            string[] directoriesToDelete = new string[] {
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OinkIndustries"),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "LemiProject"),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Desmod"),
+                Path.Combine("C:\\", "exechack"),
+                Path.Combine("C:\\", "GaztoofScripthook"),
+                Path.Combine("C:\\", "GMOD-SDK-Settings")
+            };
+
+            foreach (string directory in directoriesToDelete)
+            {
+                try
+                {
+                    if (Directory.Exists(directory))
+                    {
+                        await Task.Run(() => Directory.Delete(directory, true));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception instead of writing to the console
+                    _logger.LogError(ex, $"Failed to delete directory {directory}");
+                }
+            }
+
+            var loadingWindow = new LoadingWindow();
+            loadingWindow.Show();
+        }
+
 
         // Improved cleaner function
         static void cleaner(bool keepAddons, string path)

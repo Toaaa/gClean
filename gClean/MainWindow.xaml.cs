@@ -68,8 +68,8 @@ namespace gClean
 
             // if (CleanCheatsCheck.IsChecked.HasValue && CleanCheatsCheck.IsChecked.Value)
             // {
-            //     CleanCheats();
-            // }
+           //      CleanCheats();
+           //  }
 
             var result = new LoadingWindow();
             result.Show();

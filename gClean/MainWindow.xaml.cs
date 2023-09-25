@@ -3,9 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.IO;
 using Microsoft.Win32;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace gClean
 {
@@ -15,7 +12,6 @@ namespace gClean
 
     public partial class MainWindow : Window
     {
-        private static readonly ILogger _logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<MainWindow>();
         public MainWindow()
         {
 
@@ -32,49 +28,14 @@ namespace gClean
         }
 
         public static string path = "";
-
-        private void CleanCheatsCheck_Checked(object sender, RoutedEventArgs e)
-        { }
-
-        private void CleanCheatsCheck_Unchecked(object sender, RoutedEventArgs e)
-        { }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             bool KeepAddons = AddonsCheck.IsChecked.Value;
             bool ClearCache = ClearCheck.IsChecked.Value;
-            // bool CleanCheats = CleanCheatsCheck.IsChecked.Value;
             string path = textbox.Text;
-
-            if (KeepAddons)
-            {
-                string addonsPath = Path.Combine(path, "addons");
-                cleaner(true, addonsPath);
-            }
-
-            if (ClearCache)
-            {
-                string cachePath = Path.Combine(path, "cache");
-                cleaner(false, cachePath);
-
-                string keyName = @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU";
-                RegistryKey key = Registry.CurrentUser.OpenSubKey(keyName, true);
-                if (key != null)
-                {
-                    key.Close();
-                    Registry.CurrentUser.DeleteSubKeyTree(keyName);
-                }
-            }
-
-            // if (CleanCheatsCheck.IsChecked.HasValue && CleanCheatsCheck.IsChecked.Value)
-            // {
-           //      CleanCheats();
-           //  }
-
-            var result = new LoadingWindow();
-            result.Show();
+            cleaner(KeepAddons, path);
+            cleaner(ClearCache, path);
         }
-
         private void Button_MouseHover(object sender, EventArgs e)
         {
 
@@ -109,8 +70,6 @@ namespace gClean
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            var lw = new LoadingWindow();
-            lw.Show();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -134,36 +93,16 @@ namespace gClean
 
         }
 
-        private void cbox_Checked(object sender, RoutedEventArgs e)
+        private void Button_Click_69(object sender, RoutedEventArgs e)
         {
 
-        }
-        private void cbox_Checked1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void cbox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void cbox_Unchecked1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private async void CleanCheats(object sender, RoutedEventArgs e)
-        {
-            string path = textbox.Text;
             string keyName = @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU";
 
-            using (var key = Registry.CurrentUser.OpenSubKey(keyName, true))
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(keyName, true);
+            if (key != null)
             {
-                if (key != null)
-                {
-                    key.DeleteSubKeyTree(keyName);
-                }
+                key.Close();
+                Registry.CurrentUser.DeleteSubKeyTree(keyName);
             }
 
             string[] directoriesToDelete = new string[] {
@@ -183,20 +122,35 @@ namespace gClean
                 {
                     if (Directory.Exists(directory))
                     {
-                        await Task.Run(() => Directory.Delete(directory, true));
+                        Directory.Delete(directory, true);
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception instead of writing to the console
-                    _logger.LogError(ex, $"Failed to delete directory {directory}");
+                    // handle exception
                 }
             }
 
-            var loadingWindow = new LoadingWindow();
-            loadingWindow.Show();
         }
 
+        private void cbox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void cbox_Checked1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cbox_Unchecked1(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         // Improved cleaner function
         static void cleaner(bool keepAddons, string path)
@@ -215,12 +169,6 @@ namespace gClean
                 "sv.db"
             };
 
-            List<string> excludeFromDelete = new List<string>
-            {
-                "sb_dupes",
-                "sb_adverts"
-            };
-
             if (!Directory.Exists(path))
             {
                 var ew = new Error();
@@ -231,7 +179,7 @@ namespace gClean
             foreach (string directoryName in directoriesToDelete)
             {
                 string directoryPath = Path.Combine(path, "garrysmod", directoryName);
-                if (Directory.Exists(directoryPath) && !excludeFromDelete.Contains(directoryName))
+                if (Directory.Exists(directoryPath))
                 {
                     Directory.Delete(directoryPath, true);
                 }
@@ -255,7 +203,6 @@ namespace gClean
                 }
             }
         }
-
 
 
         // Improved locategmod function

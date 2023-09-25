@@ -7,7 +7,6 @@ namespace gClean
     /// </summary>
     public partial class App : Application
     {
-
     }
 
  }

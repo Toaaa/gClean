@@ -28,6 +28,7 @@ namespace gClean
         }
 
         public static string path = "";
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             bool KeepAddons = AddonsCheck.IsChecked.Value;
@@ -131,6 +132,8 @@ namespace gClean
                 }
             }
 
+            var success = new Success();
+            success.Show();
         }
 
         private void cbox_Checked(object sender, RoutedEventArgs e)
@@ -205,6 +208,9 @@ namespace gClean
                     File.Delete(filePath);
                 }
             }
+
+            var success = new Success();
+            success.Show();
         }
 
 

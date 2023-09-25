@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:gClean"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
-    Title="0x AA"
+    Title="gClean"
     Width="370"
     Height="304.898"
     Background="#FF252525"

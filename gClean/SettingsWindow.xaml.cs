@@ -20,6 +20,9 @@ namespace gClean
             if (Directory.Exists(directoryPath))
             {
                 Directory.Delete(directoryPath, true);
+
+                var success = new Success();
+                success.Show();
             }
             else
             {

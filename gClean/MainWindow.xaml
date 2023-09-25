@@ -133,7 +133,7 @@
         <CheckBox
             x:Name="AddonsCheck"
             Grid.Column="2"
-            Width="239"
+            Width="101"
             Height="15"
             Margin="11,245,0,0"
             HorizontalAlignment="Left"
@@ -190,8 +190,7 @@
         <CheckBox
             x:Name="ClearCheck"
             Grid.Column="2"
-            Grid.ColumnSpan="2"
-            Width="238"
+            Width="102"
             Height="16"
             Margin="150,245,0,0"
             HorizontalAlignment="Left"

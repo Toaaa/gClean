@@ -153,13 +153,16 @@ namespace gClean
         }
 
         // Improved cleaner function
-        static void cleaner(bool keepAddons, string path)
+        static void cleaner(bool KeepAddons, string path)
         {
+
             string[] directoriesToDelete = new string[]
             {
                 "data",
                 "cache\\lua",
-                "download\\user_custom"
+                "download\\user_custom",
+                "lua",
+                "saves"
             };
 
             string[] filesToDelete = new string[]
@@ -185,7 +188,7 @@ namespace gClean
                 }
             }
 
-            if (!keepAddons)
+            if (KeepAddons == false)
             {
                 string addonsPath = Path.Combine(path, "garrysmod", "addons");
                 if (Directory.Exists(addonsPath))

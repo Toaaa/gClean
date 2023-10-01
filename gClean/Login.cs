@@ -18,10 +18,10 @@ namespace KeyAuth
         */
 
         public static api KeyAuthApp = new api(
-            name: "",
-            ownerid: "",
-            secret: "",
-            version: "1.0"
+    name: "gClean",
+    ownerid: "Z08eenRjz7",
+    secret: "c7eb1341b02d3321c880f8cfd3ccb8b94e452ed06bf4fda3fce39a381d7c3128",
+    version: "2.0"
         );
         
         //This will display how long it took to make a request in ms. The param "type" is for "login", "register", "init", etc... but that is optional, as well as this function. Ideally you can just put a label or MessageBox.Show($"Request took {api.responseTime}"), but either works. 

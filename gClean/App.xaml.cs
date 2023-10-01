@@ -1,12 +1,17 @@
-﻿using System.Windows;
+﻿using KeyAuth;
+using System;
+using System.Windows;
 
 namespace gClean
 {
-    /// <summary>
-    /// Interaktionslogik für "App.xaml"
-    /// </summary>
     public partial class App : Application
     {
-    }
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
 
- }
+            Login loginWindow = new Login();
+            loginWindow.Show();
+        }
+    }
+}

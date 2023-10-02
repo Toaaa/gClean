@@ -117,7 +117,6 @@ namespace KeyAuth
             this.status.Name = "status";
             this.status.Size = new System.Drawing.Size(332, 42);
             this.status.TabIndex = 38;
-            this.status.Text = "Status: Awaiting login";
             this.status.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // username

@@ -8,27 +8,15 @@ namespace KeyAuth
 {
     public partial class Login : Form
     {
-
-        /*
-        * 
-        * WATCH THIS VIDEO TO SETUP APPLICATION: https://youtube.com/watch?v=RfDTdiBq4_o
-        * 
-		 * READ HERE TO LEARN ABOUT KEYAUTH FUNCTIONS https://github.com/KeyAuth/KeyAuth-CSHARP-Example#keyauthapp-instance-definition
-		 *
-        */
-
         public static api KeyAuthApp = new api(
-    name: "gClean",
-    ownerid: "Z08eenRjz7",
-    secret: "c7eb1341b02d3321c880f8cfd3ccb8b94e452ed06bf4fda3fce39a381d7c3128",
-    version: "2.0"
+            name: "gClean",
+            ownerid: "Z08eenRjz7",
+            secret: "c7eb1341b02d3321c880f8cfd3ccb8b94e452ed06bf4fda3fce39a381d7c3128",
+            version: "2.0"
         );
-        
-        //This will display how long it took to make a request in ms. The param "type" is for "login", "register", "init", etc... but that is optional, as well as this function. Ideally you can just put a label or MessageBox.Show($"Request took {api.responseTime}"), but either works. 
-        // if you would like to use this method, simply put it in any function and pass the param ... ShowResponse("TypeHere");
+
         private void ShowResponse(string type)
         {
-            //responseTimeLbl.Text = $"It took {api.responseTime} ms to {type}"; // you need to create a label called responseTimeLbl to display to a label.
             MessageBox.Show($"It took {api.responseTime} msg to {type}");
         }
 
@@ -114,13 +102,6 @@ namespace KeyAuth
 
         }
 
-        private void UpgradeBtn_Click(object sender, EventArgs e)
-        {
-            KeyAuthApp.upgrade(username.Text, key.Text); // success is set to false so people can't press upgrade then press login and skip logging in. it doesn't matter, since you shouldn't take any action on succesfull upgrade anyways. the only thing that needs to be done is the user needs to see the message from upgrade function
-            status.Text = "Status: " + KeyAuthApp.response.message;
-            // don't login, because they haven't authenticated. this is just to extend expiry of user with new key.
-        }
-
         private void LoginBtn_Click(object sender, EventArgs e)
         {
             KeyAuthApp.login(username.Text,password.Text);
@@ -134,41 +115,14 @@ namespace KeyAuth
                 status.Text = "Status: " + KeyAuthApp.response.message;
         }
 
-        private void RgstrBtn_Click(object sender, EventArgs e)
+        private void key_TextChanged(object sender, EventArgs e)
         {
-            string email = this.email.Text;
-            if(email == "Email (leave blank if none)") { // default value
-                email = null;
-            }
 
-            KeyAuthApp.register(username.Text, password.Text, key.Text, email);
-            if (KeyAuthApp.response.success)
-            {
-                MainWindow main = new MainWindow();
-                main.Show();
-                this.Hide();
-            }
-            else
-                status.Text = "Status: " + KeyAuthApp.response.message;
         }
 
-        private void LicBtn_Click(object sender, EventArgs e)
+        private void status_Click(object sender, EventArgs e)
         {
-            KeyAuthApp.license(key.Text);
-            if (KeyAuthApp.response.success)
-            {
-                MainWindow main = new MainWindow();
-                main.Show();
-                this.Hide();
-            }
-            else
-                status.Text = "Status: " + KeyAuthApp.response.message;
-        }
 
-        private void siticoneRoundedButton1_Click(object sender, EventArgs e)
-        {
-            KeyAuthApp.forgot(username.Text, email.Text);
-            status.Text = "Status: " + KeyAuthApp.response.message;
         }
     }
 }

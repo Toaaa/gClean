@@ -11,7 +11,6 @@ using System.Security.Principal;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
-using System.Windows;
 using System.Threading;
 using System.Runtime.CompilerServices;
 

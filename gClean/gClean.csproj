@@ -277,9 +277,6 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StartUp.xaml.cs">
-      <DependentUpon>StartUp.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Success.xaml.cs">
       <DependentUpon>Success.xaml</DependentUpon>
     </Compile>
@@ -310,10 +307,6 @@
     <Page Include="SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StartUp.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Success.xaml">
       <SubType>Designer</SubType>

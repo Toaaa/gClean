@@ -1,5 +1,4 @@
 ﻿using KeyAuth;
-using System;
 using System.Windows;
 
 namespace gClean

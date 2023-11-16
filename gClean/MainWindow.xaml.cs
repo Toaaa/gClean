@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.IO;
 using Microsoft.Win32;
+using System.Diagnostics;
+using System.Linq;
 
 namespace gClean
 {
@@ -133,6 +135,13 @@ namespace gClean
                     // handle exception
                 }
             }
+
+            string[] targets = { "OINK/login" };
+
+
+            Process.Start("cmdkey.exe", "/delete:" + targets.First());
+
+
 
             var success = new Success();
             success.Show();

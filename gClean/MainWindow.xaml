@@ -167,9 +167,9 @@
             ToolTip="Open AutoInject Window" />
         <Button
             Grid.Column="2"
-            Width="45"
-            Height="53"
-            Margin="0,0,11,224"
+            Width="46"
+            Height="43"
+            Margin="0,0,14,165"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
             Background="{x:Null}"
@@ -178,15 +178,15 @@
             Content="CleanCheats"
             Foreground="{x:Null}"
             Opacity="0.1"
-            RenderTransformOrigin="0.467,0.417"
+            RenderTransformOrigin="0.44,1.05"
             ToolTip="Clean your cheats" />
         <fa:ImageAwesome
             Grid.Column="2"
-            Margin="271,10,21,232"
+            Margin="269,77,21,172"
             Foreground="White"
             Icon="Heart"
             Opacity="0.1"
-            RenderTransformOrigin="0.349,0.197" />
+            RenderTransformOrigin="-0.098,2.154" />
         <CheckBox
             x:Name="ClearCheck"
             Grid.Column="2"

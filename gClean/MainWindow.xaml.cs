@@ -5,6 +5,7 @@ using System.IO;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace gClean
 {
@@ -110,6 +111,8 @@ namespace gClean
                 Registry.CurrentUser.DeleteSubKeyTree(keyName);
             }
 
+
+
             string[] directoriesToDelete = new string[] {
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OinkIndustries"),
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "LemiProject"),
@@ -136,16 +139,57 @@ namespace gClean
                 }
             }
 
-            string[] targets = { "OINK/login" };
+            string userName = Environment.UserName;
+            string[] directories = { $"C:\\Users\\{userName}\\Recent", "C:\\Windows\\Prefetch" };
+
+            foreach (var directory in directories)
+            {
+                try
+                {
+                    foreach (var file in new DirectoryInfo(directory).GetFiles())
+                    {
+                        if (file.Name.Contains("OinkIndustries") || file.Name.Contains("gClean") || file.Name.Contains("GCLEAN"))
+                        {
+                            file.Delete();
+                        }
+                    }
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    // wenn prefetch oder recent komplett gelöscht continued es ;)
+                    continue;
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    // wenn ordner nicht gefunden continue
+                    continue;
+                }
+                catch (Exception ex)
+                {
+                    // handle exception
+                    continue;
+                }
+            }
 
 
-            Process.Start("cmdkey.exe", "/delete:" + targets.First());
 
+
+            {
+                string[] targets = { "OINK/login" };
+
+
+                Process.Start("cmdkey.exe", "/delete:" + targets.First());
+
+            }
 
 
             var success = new Success();
             success.Show();
+
+
         }
+
+
 
         private void cbox_Checked(object sender, RoutedEventArgs e)
         {

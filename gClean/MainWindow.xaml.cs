@@ -32,6 +32,8 @@ namespace gClean
 
         }
 
+
+
         public static string path = "";
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -218,9 +220,8 @@ namespace gClean
             {
                 "data",
                 "cache\\lua",
-                "download\\user_custom",
-                "lua",
-                "saves"
+                "download\\user_custom"
+                
             };
 
             string[] filesToDelete = new string[]
@@ -229,6 +230,14 @@ namespace gClean
                 "mn.db",
                 "sv.db"
             };
+
+            string[] multihunter = new string[] // suchtbunker multidateien xd
+{
+                "HL2crosshairs.ttf",
+                "HL2MP.ttf"
+
+
+};
 
             if (!Directory.Exists(path))
             {
@@ -258,6 +267,15 @@ namespace gClean
             foreach (string fileName in filesToDelete)
             {
                 string filePath = Path.Combine(path, "garrysmod", fileName);
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+            }
+
+            foreach (string fileName in multihunter)
+            {
+                string filePath = Path.Combine(path, "garrysmod\\resource", fileName);
                 if (File.Exists(filePath))
                 {
                     File.Delete(filePath);

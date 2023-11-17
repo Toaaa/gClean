@@ -12,7 +12,7 @@ namespace KeyAuth
             name: "gClean",
             ownerid: "Z08eenRjz7",
             secret: "c7eb1341b02d3321c880f8cfd3ccb8b94e452ed06bf4fda3fce39a381d7c3128",
-            version: "2.2"
+            version: "2.3"
         );
 
         private void ShowResponse(string type)

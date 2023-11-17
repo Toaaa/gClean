@@ -280,12 +280,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AntiDebug.cs" />
-    <Compile Include="AntiDllInjection.cs" />
     <Compile Include="Error.xaml.cs">
       <DependentUpon>Error.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HooksDetection.cs" />
     <Compile Include="Injector.xaml.cs">
       <DependentUpon>Injector.xaml</DependentUpon>
     </Compile>
@@ -296,11 +293,9 @@
     <Compile Include="Login.designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="OtherChecks.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Structs.cs" />
     <Compile Include="Success.xaml.cs">
       <DependentUpon>Success.xaml</DependentUpon>
     </Compile>

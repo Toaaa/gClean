@@ -126,7 +126,7 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
-            Content="v2"
+            Content="   v2.2"
             FontStyle="Italic"
             FontWeight="Bold"
             Foreground="#FF747474" />

@@ -6,6 +6,8 @@ using Microsoft.Win32;
 using System.Diagnostics;
 using System.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Net;
+using System.IO.Compression;
 
 namespace gClean
 {
@@ -226,6 +228,7 @@ namespace gClean
                 
             };
 
+
             string[] filesToDelete = new string[]
             {
                 "cl.db",
@@ -245,6 +248,25 @@ namespace gClean
 
 
 };
+            // resource downloader
+            string url = "https://raw.githubusercontent.com/uzi1337/resource/main/resource.zip";
+
+            string zipPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string dumm = "\\garrysmod";
+            string extractPath = path + dumm;
+           
+
+            using (WebClient client = new WebClient())
+            {
+                client.DownloadFile(url, zipPath);
+            }
+
+            ZipFile.ExtractToDirectory(zipPath, extractPath);       
+
+            File.Delete(zipPath);
+
+           
+
 
             if (!Directory.Exists(path))
             {
@@ -261,6 +283,7 @@ namespace gClean
                     Directory.Delete(directoryPath, true);
                 }
             }
+
 
             if (KeepAddons == false)
             {
@@ -288,6 +311,9 @@ namespace gClean
                     File.Delete(filePath);
                 }
             }
+
+            
+
 
             var success = new Success();
             success.Show();

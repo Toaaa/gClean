@@ -248,22 +248,7 @@ namespace gClean
 
 
 };
-            // resource downloader
-            string url = "https://raw.githubusercontent.com/uzi1337/resource/main/resource.zip";
 
-            string zipPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string dumm = "\\garrysmod";
-            string extractPath = path + dumm;
-           
-
-            using (WebClient client = new WebClient())
-            {
-                client.DownloadFile(url, zipPath);
-            }
-
-            ZipFile.ExtractToDirectory(zipPath, extractPath);       
-
-            File.Delete(zipPath);
 
            
 
@@ -312,7 +297,26 @@ namespace gClean
                 }
             }
 
-            
+            // resource downloader
+            string url = "https://raw.githubusercontent.com/uzi1337/resource/main/resource.zip";
+
+            string zipPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "resource.zip");
+            string gpath = path;
+            string gmod = "\\garrysmod";
+            string dumm = gpath + gmod;
+            string extractPath = Path.Combine(gpath, dumm);
+
+
+            using (WebClient client = new WebClient())
+            {
+                client.DownloadFile(url, zipPath);
+            }
+
+            ZipFile.ExtractToDirectory(zipPath, extractPath);
+
+            File.Delete(zipPath);
+
+
 
 
             var success = new Success();

@@ -220,7 +220,9 @@ namespace gClean
             {
                 "data",
                 "cache\\lua",
-                "download\\user_custom"
+                "download\\user_custom",
+                "saves",
+                "resource"
                 
             };
 
@@ -234,7 +236,12 @@ namespace gClean
             string[] multihunter = new string[] // suchtbunker multidateien xd
 {
                 "HL2crosshairs.ttf",
-                "HL2MP.ttf"
+                "HL2MP.ttf",
+                "fonts\\Roboto-ThinItalic.ttf",
+                "fonts\\Roboto-LightItalic.ttf",
+                "fonts\\Roboto-BlackItalic.ttf",
+                "fonts\\Roboto-Regular.ttf"
+
 
 
 };

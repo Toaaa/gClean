@@ -298,23 +298,45 @@ namespace gClean
             }
 
             // resource downloader
-            string url = "https://raw.githubusercontent.com/uzi1337/resource/main/resource.zip";
-
+            string url = "https://codeload.github.com/Facepunch/garrysmod/zip/refs/heads/master";
             string zipPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "resource.zip");
             string gpath = path;
             string gmod = "\\garrysmod";
             string dumm = gpath + gmod;
             string extractPath = Path.Combine(gpath, dumm);
 
-
             using (WebClient client = new WebClient())
             {
                 client.DownloadFile(url, zipPath);
             }
 
-            ZipFile.ExtractToDirectory(zipPath, extractPath);
+            using (ZipArchive archive = ZipFile.OpenRead(zipPath))
+            {
+                foreach (ZipArchiveEntry entry in archive.Entries)
+                {
+                    if (entry.FullName.StartsWith("garrysmod-master/garrysmod/resource") && entry.Name != "")
+                    {
+                        
+                        string destinationPath = Path.GetFullPath(Path.Combine(extractPath, entry.FullName.Replace("garrysmod-master/garrysmod/", "")));
 
-            File.Delete(zipPath);
+                        if (destinationPath.StartsWith(extractPath, StringComparison.Ordinal))
+                        {
+                            string directoryName = Path.GetDirectoryName(destinationPath);
+                            if (!Directory.Exists(directoryName))
+                            {
+                                Directory.CreateDirectory(directoryName);
+                            }
+
+                            if (!File.Exists(destinationPath))
+                            {
+                                entry.ExtractToFile(destinationPath);
+                            }
+                        }
+                        
+                    }
+                }
+            }
+
 
 
 

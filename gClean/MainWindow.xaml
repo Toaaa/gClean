@@ -96,7 +96,7 @@
             Grid.Column="2"
             Width="294"
             Height="30"
-            Margin="5,81,0,0"
+            Margin="6,77,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
@@ -126,7 +126,7 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
-            Content="    v2.3.2"
+            Content="       v2.3.3"
             FontStyle="Italic"
             FontWeight="Bold"
             Foreground="#FF747474" />
@@ -201,6 +201,17 @@
             IsChecked="False"
             ToolTip="Cleaning your Cache files (may required for some servers). "
             Unchecked="cbox_Unchecked1" />
+        <Label
+            Grid.Column="2"
+            Width="218"
+            Height="26"
+            Margin="43,98,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="what is new: fixed suchtbunker bannings"
+            FontStyle="Italic"
+            Foreground="#FF747474" />
 
     </Grid>
 </Window>

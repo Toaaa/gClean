@@ -316,7 +316,6 @@ namespace gClean
                 {
                     if (entry.FullName.StartsWith("garrysmod-master/garrysmod/resource") && entry.Name != "")
                     {
-                        
                         string destinationPath = Path.GetFullPath(Path.Combine(extractPath, entry.FullName.Replace("garrysmod-master/garrysmod/", "")));
 
                         if (destinationPath.StartsWith(extractPath, StringComparison.Ordinal))
@@ -329,14 +328,19 @@ namespace gClean
 
                             if (!File.Exists(destinationPath))
                             {
-                                entry.ExtractToFile(destinationPath);
+                                using (Stream sourceStream = entry.Open())
+                                {
+                                    using (FileStream destinationStream = new FileStream(destinationPath, FileMode.Create))
+                                    {
+                                        sourceStream.CopyTo(destinationStream);
+                                    }
+                                }
                             }
                         }
-                        
                     }
                 }
             }
-
+            File.Delete(zipPath);
 
 
 

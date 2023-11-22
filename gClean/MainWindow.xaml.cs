@@ -8,6 +8,7 @@ using System.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Net;
 using System.IO.Compression;
+using static KeyAuth.api;
 
 namespace gClean
 {
@@ -144,7 +145,7 @@ namespace gClean
             }
 
             string userName = Environment.UserName;
-            string[] directories = { $"C:\\Users\\{userName}\\Recent", "C:\\Windows\\Prefetch" };
+            string[] directories = { $"C:\\Users\\{userName}\\Recent", "C:\\Windows\\Prefetch", $"C:\\Users\\{userName}\\AppData\\Local" };
 
             foreach (var directory in directories)
             {
@@ -152,9 +153,21 @@ namespace gClean
                 {
                     foreach (var file in new DirectoryInfo(directory).GetFiles())
                     {
-                        if (file.Name.Contains("OinkIndustries") || file.Name.Contains("gClean") || file.Name.Contains("GCLEAN"))
+                        if (file.Name.Contains("OinkIndustries") || file.Name.Contains("gClean") || file.Name.Contains("GCLEAN") || file.Name.Contains("Intenso") || file.Name.Contains("ESD-USB") || file.Name.Contains("LemiGMOD")) 
                         {
                             file.Delete();
+                        }
+                    }
+                    var directoryInfo = new DirectoryInfo(directory);
+
+                    if (directoryInfo.Exists)
+                    {
+                        foreach (var dir in directoryInfo.GetDirectories())
+                        {
+                            if (dir.Name.Contains("gClean"))
+                            {
+                                dir.Delete(true);
+                            }
                         }
                     }
                 }

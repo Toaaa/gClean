@@ -41,10 +41,10 @@ namespace gClean
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            bool KeepAddons = AddonsCheck.IsChecked.Value;
+            bool ClearAddons = AddonsCheck.IsChecked.Value;
             bool ClearCache = ClearCheck.IsChecked.Value;
             string path = textbox.Text;
-            cleaner(KeepAddons, path);
+            cleaner(ClearAddons, path);
             cleaner(ClearCache, path);
         }
         private void Button_MouseHover(object sender, EventArgs e)
@@ -138,7 +138,7 @@ namespace gClean
                         Directory.Delete(directory, true);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     // handle exception
                 }
@@ -153,7 +153,7 @@ namespace gClean
                 {
                     foreach (var file in new DirectoryInfo(directory).GetFiles())
                     {
-                        if (file.Name.Contains("OinkIndustries") || file.Name.Contains("gClean") || file.Name.Contains("GCLEAN") || file.Name.Contains("Intenso") || file.Name.Contains("ESD-USB") || file.Name.Contains("LemiGMOD")) 
+                        if (file.Name.Contains("OinkIndustries") || file.Name.Contains("gClean") || file.Name.Contains("GCLEAN") || file.Name.Contains("Intenso") || file.Name.Contains("ESD-USB") || file.Name.Contains("LemiGMOD"))
                         {
                             file.Delete();
                         }
@@ -188,17 +188,10 @@ namespace gClean
                 }
             }
 
-
-
-
             {
                 string[] targets = { "OINK/login" };
-
-
                 Process.Start("cmdkey.exe", "/delete:" + targets.First());
-
             }
-
 
             var success = new Success();
             success.Show();
@@ -228,19 +221,15 @@ namespace gClean
         }
 
         // Improved cleaner function
-        static void cleaner(bool KeepAddons, string path)
+        static void cleaner(bool ClearAddons, string path)
         {
-
             string[] directoriesToDelete = new string[]
             {
-                "data",
                 "cache\\lua",
                 "download\\user_custom",
                 "saves",
                 "resource"
-                
             };
-
 
             string[] filesToDelete = new string[]
             {
@@ -249,22 +238,15 @@ namespace gClean
                 "sv.db"
             };
 
-            string[] multihunter = new string[] // suchtbunker multidateien xd
-{
+            string[] multihunter = new string[]
+            {
                 "HL2crosshairs.ttf",
                 "HL2MP.ttf",
                 "fonts\\Roboto-ThinItalic.ttf",
                 "fonts\\Roboto-LightItalic.ttf",
                 "fonts\\Roboto-BlackItalic.ttf",
                 "fonts\\Roboto-Regular.ttf"
-
-
-
-};
-
-
-           
-
+            };
 
             if (!Directory.Exists(path))
             {
@@ -278,12 +260,26 @@ namespace gClean
                 string directoryPath = Path.Combine(path, "garrysmod", directoryName);
                 if (Directory.Exists(directoryPath))
                 {
-                    Directory.Delete(directoryPath, true);
+                    if (directoryName == "data")
+                    {
+                        string[] subDirectories = Directory.GetDirectories(directoryPath);
+                        foreach (string subDir in subDirectories)
+                        {
+                            DirectoryInfo info = new DirectoryInfo(subDir);
+                            if (info.Name != "sb_adverts" && info.Name != "sb_dupes")
+                            {
+                                Directory.Delete(subDir, true);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Directory.Delete(directoryPath, true);
+                    }
                 }
             }
 
-
-            if (KeepAddons == false)
+            if (ClearAddons)
             {
                 string addonsPath = Path.Combine(path, "garrysmod", "addons");
                 if (Directory.Exists(addonsPath))
@@ -354,9 +350,6 @@ namespace gClean
                 }
             }
             File.Delete(zipPath);
-
-
-
 
             var success = new Success();
             success.Show();

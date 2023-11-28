@@ -238,16 +238,6 @@ namespace gClean
                 "sv.db"
             };
 
-            string[] multihunter = new string[]
-            {
-                "HL2crosshairs.ttf",
-                "HL2MP.ttf",
-                "fonts\\Roboto-ThinItalic.ttf",
-                "fonts\\Roboto-LightItalic.ttf",
-                "fonts\\Roboto-BlackItalic.ttf",
-                "fonts\\Roboto-Regular.ttf"
-            };
-
             if (!Directory.Exists(path))
             {
                 var ew = new Error();
@@ -255,27 +245,36 @@ namespace gClean
                 return;
             }
 
+            string dataPath = Path.Combine(path, "garrysmod", "data");
+            if (Directory.Exists(dataPath))
+            {
+                string[] subfolders = Directory.GetDirectories(dataPath);
+                foreach (string subfolder in subfolders)
+                {
+                    string folderName = new DirectoryInfo(subfolder).Name;
+                    if (folderName != "sb_adverts" && folderName != "sb_dupes")
+                    {
+                        Directory.Delete(subfolder, true);
+                    }
+                }
+
+                string[] files = Directory.GetFiles(dataPath);
+                foreach (string file in files)
+                {
+                    string fileName = Path.GetFileName(file);
+                    if (fileName != "ben_derma_settings.txt")
+                    {
+                        File.Delete(file);
+                    }
+                }
+            }
+
             foreach (string directoryName in directoriesToDelete)
             {
                 string directoryPath = Path.Combine(path, "garrysmod", directoryName);
                 if (Directory.Exists(directoryPath))
                 {
-                    if (directoryName == "data")
-                    {
-                        string[] subDirectories = Directory.GetDirectories(directoryPath);
-                        foreach (string subDir in subDirectories)
-                        {
-                            DirectoryInfo info = new DirectoryInfo(subDir);
-                            if (info.Name != "sb_adverts" && info.Name != "sb_dupes")
-                            {
-                                Directory.Delete(subDir, true);
-                            }
-                        }
-                    }
-                    else
-                    {
                         Directory.Delete(directoryPath, true);
-                    }
                 }
             }
 
@@ -291,15 +290,6 @@ namespace gClean
             foreach (string fileName in filesToDelete)
             {
                 string filePath = Path.Combine(path, "garrysmod", fileName);
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
-            }
-
-            foreach (string fileName in multihunter)
-            {
-                string filePath = Path.Combine(path, "garrysmod\\resource", fileName);
                 if (File.Exists(filePath))
                 {
                     File.Delete(filePath);
@@ -354,7 +344,6 @@ namespace gClean
             var success = new Success();
             success.Show();
         }
-
 
         // Improved locategmod function
         private string LocateGMod()

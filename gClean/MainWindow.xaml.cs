@@ -225,7 +225,6 @@ namespace gClean
         {
             string[] directoriesToDelete = new string[]
             {
-                "cache\\lua",
                 "download\\user_custom",
                 "saves",
                 "resource"
@@ -252,7 +251,7 @@ namespace gClean
                 foreach (string subfolder in subfolders)
                 {
                     string folderName = new DirectoryInfo(subfolder).Name;
-                    if (folderName != "sb_adverts" && folderName != "sb_dupes")
+                    if (folderName != "sb_adverts" && folderName != "sb_dupes" && folderName != "cw2_0" && folderName != "mgattchvendor")
                     {
                         Directory.Delete(subfolder, true);
                     }

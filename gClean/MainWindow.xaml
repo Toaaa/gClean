@@ -1,12 +1,12 @@
 ﻿<Window
     x:Class="gClean.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:fa="http://schemas.fontawesome.io/icons/"
-    xmlns:local="clr-namespace:gClean"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:fa="http://schemas.fontawesome.io/icons/"
+	xmlns:local="clr-namespace:gClean"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
     Title="gClean"
     Width="370"
     Height="304.898"
@@ -17,23 +17,23 @@
     WindowStyle="SingleBorderWindow"
     mc:Ignorable="d">
     <Grid Background="#FF191818" RenderTransformOrigin="0.501,0.527">
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25" />
             <ColumnDefinition Width="8*" />
-            <ColumnDefinition Width="337*" />
+            <ColumnDefinition Width="233*" />
+            <ColumnDefinition Width="104*"/>
             <ColumnDefinition Width="0*" />
         </Grid.ColumnDefinitions>
         <fa:ImageAwesome
-            Grid.Column="2"
-            Margin="269,142,21,108"
+            Grid.Column="3"
+            Margin="36,142,21,108"
             Foreground="White"
             Icon="Cogs"
             Opacity="0.1"
             RenderTransformOrigin="0.349,0.197" />
         <Button
             Grid.Column="1"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             Width="257"
             Height="60"
             Margin="0,178,85,0"
@@ -67,7 +67,7 @@
             Grid.Column="2"
             Width="156"
             Height="70"
-            Margin="0,11,109,0"
+            Margin="0,11,5,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Content="gClean"
@@ -91,7 +91,7 @@
             Text="Your G-Mod Path (ex. C:\garrysmod)"
             TextChanged="textbox_TextChanged"
             TextWrapping="Wrap"
-            ToolTip="Enter your Game Installation Path" />
+            ToolTip="Enter your Game Installation Path" Grid.ColumnSpan="2" />
         <Label
             Grid.Column="2"
             Width="294"
@@ -102,9 +102,9 @@
             HorizontalContentAlignment="Center"
             Content="&quot;The ultimate minging software&quot;"
             FontStyle="Italic"
-            Foreground="#FF747474" />
+            Foreground="#FF747474" Grid.ColumnSpan="2" />
         <Button
-            Grid.Column="2"
+            Grid.Column="3"
             Width="27"
             Height="25"
             Margin="0,0,22,105"
@@ -119,7 +119,7 @@
             ToolTip="Open Settings Window" />
         <Label
             Grid.Column="2"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             Width="287"
             Height="30"
             Margin="0,42,-29,0"
@@ -145,14 +145,14 @@
             ToolTip="Cleans your Addons folder. "
             Unchecked="cbox_Unchecked" />
         <fa:ImageAwesome
-            Grid.Column="2"
-            Margin="269,210,21,39"
+            Grid.Column="3"
+            Margin="36,210,21,39"
             Foreground="White"
             Icon="Dashboard"
             Opacity="0.1"
             RenderTransformOrigin="0.349,0.197" />
         <Button
-            Grid.Column="2"
+            Grid.Column="3"
             Width="29"
             Height="25"
             Margin="0,0,22,35"
@@ -166,7 +166,7 @@
             Opacity="0.1"
             ToolTip="Open AutoInject Window" />
         <Button
-            Grid.Column="2"
+            Grid.Column="3"
             Width="46"
             Height="43"
             Margin="0,0,14,165"
@@ -181,8 +181,8 @@
             RenderTransformOrigin="0.44,1.05"
             ToolTip="Clean your cheats" />
         <fa:ImageAwesome
-            Grid.Column="2"
-            Margin="269,77,21,172"
+            Grid.Column="3"
+            Margin="36,77,21,172"
             Foreground="White"
             Icon="Heart"
             Opacity="0.1"
@@ -200,7 +200,7 @@
             Foreground="#FF747474"
             IsChecked="False"
             ToolTip="Cleaning your Cache files (may required for some servers). "
-            Unchecked="cbox_Unchecked1" />
+            Unchecked="cbox_Unchecked1" Grid.ColumnSpan="2" />
         <Label
             Grid.Column="2"
             Width="218"
@@ -211,7 +211,6 @@
             HorizontalContentAlignment="Center"
             Content="what is new: fixed suchtbunker bannings"
             FontStyle="Italic"
-            Foreground="#FF747474" />
-
+            Foreground="#FF747474" Grid.ColumnSpan="2" />
     </Grid>
 </Window>
